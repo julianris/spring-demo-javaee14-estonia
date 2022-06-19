@@ -4,6 +4,7 @@ import com.sda.springdemojavaee14.service.GreetingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -37,10 +38,20 @@ public class MyFirstRestController {
         return "Welcome to spring class!!!";
     }
 
-    @GetMapping("/greeting")
-    public String greetUser(){
-        log.info("greetUser");
+    // example query link from google:
+    // https://www.google.com/search?q=Estonia
+    // server: https://www.google.com
+    // /search: application (endpoint) on the server
+    // ? : query separator
+    // q=Estonia, q: parameter name, Estonia is value for q parameter
+    // & is used if more parameters are coming
+    // /greeting?name=Julian&surname=Risler
 
-        return greetingService.makeSomeGreetingToUser("Julian");
+    @GetMapping("/greeting")
+    public String greetUser(@RequestParam(value = "name", defaultValue = "Jan") String firstName,
+                            @RequestParam(value = "surname", defaultValue = "Kowalski") String surname){
+        log.info("greetUser called with params: name: [{}], surname: [{}]", firstName, surname); //String.format("name: %s", name);
+
+        return greetingService.makeSomeGreetingToUser(firstName + " " + surname);
     }
 }

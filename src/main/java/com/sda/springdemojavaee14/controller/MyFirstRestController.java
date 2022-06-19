@@ -1,9 +1,9 @@
 package com.sda.springdemojavaee14.controller;
 
+import com.sda.springdemojavaee14.service.GreetingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -17,6 +17,14 @@ public class MyFirstRestController {
 
     private static final Logger log = LoggerFactory.getLogger(MyFirstRestController.class);
 
+    private final GreetingService greetingService;
+
+    //dependency injection = providing required collaborators/dependencies by Spring
+
+    public MyFirstRestController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+
     // @GetMapping means
     // - code of the method will be run when we hit endpoint
     // - we use exact http method
@@ -26,5 +34,12 @@ public class MyFirstRestController {
         log.info("hello method was called.");
 
         return "Welcome to spring class!!!";
+    }
+
+    @GetMapping("/greeting")
+    public String greetUser(){
+        log.info("greetUser");
+
+        return greetingService.makeSomeGreetingToUser("Julian");
     }
 }

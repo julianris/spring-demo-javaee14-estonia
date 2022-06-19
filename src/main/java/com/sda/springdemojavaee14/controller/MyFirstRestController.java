@@ -19,6 +19,7 @@ public class MyFirstRestController {
 
     private final GreetingService greetingService;
 
+    //@Autowired - it's optional
     //dependency injection = providing required collaborators/dependencies by Spring
 
     public MyFirstRestController(GreetingService greetingService) {

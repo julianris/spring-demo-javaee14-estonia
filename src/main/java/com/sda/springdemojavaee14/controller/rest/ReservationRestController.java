@@ -24,5 +24,6 @@ public class ReservationRestController {
     @GetMapping("/reservations")
     public List<Reservation> getAllReservations() {
         log.info("getting all reservations");
+        return reservationService.findAllReservations();
     }
 }

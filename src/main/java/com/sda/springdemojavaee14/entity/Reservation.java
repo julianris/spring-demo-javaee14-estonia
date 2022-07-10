@@ -12,8 +12,9 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table (name = "RESERVATIONS")
+@Entity //for mapping class to database table (for creating connection with database)
+// (by default @Entity uses class name as table name)
+@Table (name = "RESERVATIONS") //for overriding default table name
 public class Reservation {
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)

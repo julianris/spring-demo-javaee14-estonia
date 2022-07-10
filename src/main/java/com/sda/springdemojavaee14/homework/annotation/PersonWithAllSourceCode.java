@@ -51,6 +51,7 @@ public class PersonWithAllSourceCode {
                 '}';
     }
 
+    //If you provide equals method always add hashCode too
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

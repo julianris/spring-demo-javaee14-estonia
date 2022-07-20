@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @Slf4j
 @RequestMapping("/api")
+// TODO: deploy to Heroku
 public class ReservationRestController {
 
     private final ReservationService reservationService;
@@ -30,7 +32,10 @@ public class ReservationRestController {
     @GetMapping("/reservations")
     public List<Reservation> getAllReservations() {
         log.info("getting all reservations");
-
+        //not handled exception will cause 500 server response
+        if (true){
+            throw new NullPointerException("Breaking the server??");
+        }
         return reservationService.findAllReservations();
     }
 
@@ -55,6 +60,18 @@ public class ReservationRestController {
             return ResponseEntity.ok(responseBody);
         }
         else {
+            // https://danielmiessler.com/images/url-urn-uri-structure-2022.png
+            String path = "/reservations/" + reservationId;
+            try{
+                // TODO: fix server url
+                URI uri = new URI("/reservations/" + reservationId);
+                path = uri.toString();
+            } catch(URISyntaxException e){
+                log.warn("problems with creating URI", e);
+            }
+
+
+              URI uri = new URI("/reservations/" + reservationId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     GenericError.builder()
                             .responseCode(404)

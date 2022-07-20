@@ -65,7 +65,7 @@ public class ReservationRestController {
             try{
                 // TODO: fix server url
                 URI uri = new URI("/reservations/" + reservationId);
-                path = uri.toString();
+                path = uri.getPath();
             } catch(URISyntaxException e){
                 log.warn("problems with creating URI", e);
             }

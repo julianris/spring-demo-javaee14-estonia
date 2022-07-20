@@ -69,9 +69,6 @@ public class ReservationRestController {
             } catch(URISyntaxException e){
                 log.warn("problems with creating URI", e);
             }
-
-
-              URI uri = new URI("/reservations/" + reservationId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     GenericError.builder()
                             .responseCode(404)

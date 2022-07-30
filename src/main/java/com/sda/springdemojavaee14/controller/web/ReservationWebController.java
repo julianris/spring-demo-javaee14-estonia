@@ -40,5 +40,10 @@ public class ReservationWebController {
         return "reservations/all-reservations";
     }
 
-
+    @GetMapping("delete/{id}")
+    public String deleteReservation (@PathVariable("id") Long reservationId){
+        //call the service
+        reservationService.deleteReservationById(reservationId);
+        return "redirect:/web/reservations";
+    }
 }

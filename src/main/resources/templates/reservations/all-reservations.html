@@ -19,8 +19,8 @@
       <tbody>
       <!-- for (var one: reservations){}   -->
           <tr th:each="one : ${reservations}">
-            <td><span th:text="${reservation.id}">1221</span></td>
-            <td><span th:text="${reservation.surname}">Pastuszka</span></td>
+            <td><span th:text="${one.id}">1221</span></td>
+            <td><span th:text="${one.surname}">Pastuszka</span></td>
             <td><a href="#">Details</a></td>
             <td><a href="#">Edit me</a></td>
             <td><a href="#">Delete me</a></td>
